@@ -59,4 +59,20 @@ public class Order {
 	public String get() {
 		return "Hello, Newt";
 	}
+
+	public int evaluateSuccess(String expression) {
+		int sum = 0;
+		for (String summand : expression.split("\\+"))
+			sum += Integer.valueOf(summand);
+		return sum;
+	}
+
+	public int evaluateFail(String expression) {
+		int sum = 0;
+		for (String su : expression.split("\\+"))
+			sum -= Integer.valueOf(su);
+//			System.out.println(su);
+//			sum += Integer.valueOf(su);
+		return sum;
+	}
 }
