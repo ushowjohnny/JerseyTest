@@ -75,4 +75,27 @@ public class Order {
 //			sum += Integer.valueOf(su);
 		return sum;
 	}
+	
+	public static void main(String[] args) {
+		
+		
+		switch(2) {
+			case 1:
+				System.out.println(2);
+			default :
+				System.out.println("default");
+		}
+		
+		
+		long n=4,m;
+		m=f(n);
+		System.out.println(m);
+	}
+	
+	public static long f(long n) {
+		if (n==0 || n==1)
+				return n;
+		else 
+			return f(n-1)+2*f(n-2);
+	}
 }
