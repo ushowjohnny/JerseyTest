@@ -33,5 +33,5 @@ pom.xml.versionsBackup
 **/.env
 .instance_id
 Dockerfil
-.tern-project
-nb-configuration.xmle
+**/.tern-project
+**/nb-configuration.xmle
