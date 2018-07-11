@@ -14,6 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+<!-- 		<argLine>-Xmx128m</argLine> -->
 	</properties>
 
 	<dependencies>
@@ -33,22 +34,12 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>6.4</version>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
+		
 
-		<dependency>
-			<groupId>org.jacoco</groupId>
-			<artifactId>jacoco-maven-plugin</artifactId>
-			<version>0.8.1</version>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>javax</groupId>
@@ -57,21 +48,34 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>fish.payara.extras</groupId>
-			<artifactId>payara-micro</artifactId>
-			<version>4.1.1.171.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.46</version>
 		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>sonar-jacoco-listeners</artifactId>
+			<version>5.5.0.14655</version>
+			<scope>test</scope>
+		</dependency> -->
+
 	</dependencies>
 
 	<build>
 		<finalName>micro</finalName>
 		<plugins>
+			<!-- Junit start -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<runOrder>random</runOrder>
+				</configuration>
+			</plugin>
+
+
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>

@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-@org.testng.annotations.Test
 public class OrderTest {
 
 	@Test
@@ -13,12 +12,12 @@ public class OrderTest {
 		int sum = o.evaluateSuccess("1+2+3");
 		assertEquals(6, sum);
 	}
-	
-//	@Test
-//	public void evaluatesExpressionFail() {
-//		Order o = new Order();
-//		int sum = o.evaluateFail("1+2+3");
-//		assertEquals(6, sum);
-//	}
+
+	@Test
+	public void evaluatesExpressionFail() {
+		Order o = new Order();
+		int sum = o.evaluateFail("1+2+3");
+		assertEquals(6, sum);
+	}
 
 }
