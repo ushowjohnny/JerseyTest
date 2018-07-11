@@ -5,13 +5,17 @@ import java.io.InputStreamReader;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/order")
 public class Order {
 
-	// private static Logger logger = LoggerFactory.getLogger(Order.class);
+	private static Logger logger = LoggerFactory.getLogger(Order.class);
 
 	private Object env;
 
@@ -25,9 +29,11 @@ public class Order {
 
 	@GET
 	@Path("louis")
-	public Object value() {
+	public Object value(@PathParam("id") String id) {
 		env = executeCommand("printenv");
-		System.out.println(env);
+		String teString = "";
+		teString = teString + id;
+		logger.debug(teString);
 		return Response.status(Status.OK).entity(env).build();
 	}
 
@@ -71,31 +77,29 @@ public class Order {
 		int sum = 0;
 		for (String su : expression.split("\\+"))
 			sum -= Integer.valueOf(su);
-//			System.out.println(su);
-//			sum += Integer.valueOf(su);
+		// System.out.println(su);
+		// sum += Integer.valueOf(su);
 		return sum;
 	}
-	
+
 	public static void main(String[] args) {
-		
-		
-		switch(2) {
-			case 1:
-				System.out.println(2);
-			default :
-				System.out.println("default");
+
+		switch (2) {
+		case 1:
+			System.out.println(2);
+		default:
+			System.out.println("default");
 		}
-		
-		
-		long n=4,m;
-		m=f(n);
+
+		long n = 4, m;
+		m = f(n);
 		System.out.println(m);
 	}
-	
+
 	public static long f(long n) {
-		if (n==0 || n==1)
-				return n;
-		else 
-			return f(n-1)+2*f(n-2);
+		if (n == 0 || n == 1)
+			return n;
+		else
+			return f(n - 1) + 2 * f(n - 2);
 	}
 }

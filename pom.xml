@@ -15,9 +15,40 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<!-- <argLine>-Xmx128m</argLine> -->
+
+		<argLine>-Xmx128m</argLine>
+
+		<version.logger.log4j2>2.6.2</version.logger.log4j2>
 	</properties>
 
 	<dependencies>
+
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${version.logger.log4j2}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${version.logger.log4j2}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${version.logger.log4j2}</version>
+		</dependency>
+
+
+
+
+
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			<version>1.7.7</version> <scope>runtime</scope> </dependency> <dependency> 
+			<groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> <version>1.7.7</version> 
+			<scope>runtime</scope> </dependency> -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -52,20 +83,31 @@
 				<version>5.1</version>
 			</plugin>
 
-
-
 			<plugin>
-				<groupId>org.owasp</groupId>
-				<artifactId>dependency-check-maven</artifactId>
-				<version>1.4.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<runOrder>random</runOrder>
+				</configuration>
 			</plugin>
+
+
+
+
+			<!-- <plugin> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
+				<version>0.7.4.201502262128</version> <executions> <execution> <id>prepare-agent</id> 
+				<goals> <goal>prepare-agent</goal> </goals> </execution> <execution> <id>report</id> 
+				<phase>prepare-package</phase> <goals> <goal>report</goal> </goals> </execution> 
+				<execution> <id>post-unit-test</id> <phase>test</phase> <goals> <goal>report</goal> 
+				</goals> <configuration> <dataFile>target/jacoco.exec</dataFile> <outputDirectory>target/jacoco-ut</outputDirectory> 
+				</configuration> </execution> </executions> <configuration> <systemPropertyVariables> 
+				<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile> </systemPropertyVariables> 
+				</configuration> </plugin> -->
+
+
+			<!-- <plugin> <groupId>org.owasp</groupId> <artifactId>dependency-check-maven</artifactId> 
+				<version>1.4.3</version> <executions> <execution> <goals> <goal>check</goal> 
+				</goals> </execution> </executions> </plugin> -->
 		</plugins>
 	</build>
 </project>
