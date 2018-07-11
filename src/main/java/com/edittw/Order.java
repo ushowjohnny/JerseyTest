@@ -2,6 +2,8 @@ package com.edittw;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.security.SecureRandom;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -35,6 +37,7 @@ public class Order {
 		teString = teString + id;
 		logger.debug(teString);
 		return Response.status(Status.OK).entity(env).build();
+
 	}
 
 	public String executeCommand(String command) {
@@ -81,25 +84,34 @@ public class Order {
 		// sum += Integer.valueOf(su);
 		return sum;
 	}
+	
+	public void testVulnerability () throws UnsupportedEncodingException {
+		SecureRandom sr = new SecureRandom();
+		sr.setSeed(123456L); // Noncompliant
+		int v = sr.nextInt(32);
 
-	public static void main(String[] args) {
-
-		switch (2) {
-		case 1:
-			System.out.println(2);
-		default:
-			System.out.println("default");
-		}
-
-		long n = 4, m;
-		m = f(n);
-		System.out.println(m);
+		sr = new SecureRandom("abcdefghijklmnop".getBytes("us-ascii")); // Noncompliant
+		v = sr.nextInt(32);
 	}
 
-	public static long f(long n) {
-		if (n == 0 || n == 1)
-			return n;
-		else
-			return f(n - 1) + 2 * f(n - 2);
-	}
+//	public static void main(String[] args) {
+//
+//		switch (2) {
+//		case 1:
+//			System.out.println(2);
+//		default:
+//			System.out.println("default");
+//		}
+//
+//		long n = 4, m;
+//		m = f(n);
+//		System.out.println(m);
+//	}
+//
+//	public static long f(long n) {
+//		if (n == 0 || n == 1)
+//			return n;
+//		else
+//			return f(n - 1) + 2 * f(n - 2);
+//	}
 }
