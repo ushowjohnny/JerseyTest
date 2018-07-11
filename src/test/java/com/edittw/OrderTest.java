@@ -1,9 +1,10 @@
 package com.edittw;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+@org.testng.annotations.Test
 public class OrderTest {
 
 	@Test
