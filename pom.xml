@@ -17,15 +17,18 @@
 		<!-- <argLine>-Xmx128m</argLine> -->
 
 		<argLine>-Xmx128m</argLine>
-
 		<version.logger.log4j2>2.6.2</version.logger.log4j2>
+		
+		<gatling.version>2.3.1</gatling.version>
+        <gatling-plugin.version>2.2.4</gatling-plugin.version>
+        <scala-maven-plugin.version>3.3.2</scala-maven-plugin.version>
 	</properties>
 
 	<dependencies>
 
 
 		<!-- Logging -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${version.logger.log4j2}</version>
@@ -39,7 +42,7 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${version.logger.log4j2}</version>
-		</dependency>
+		</dependency> -->
 
 
 
@@ -69,6 +72,12 @@
 			<version>5.1.46</version>
 		</dependency>
 
+        <!-- Add Gatling maven plugin to support gatling startup to test performance -->
+	     <dependency>
+	             <groupId>io.gatling.highcharts</groupId>
+	             <artifactId>gatling-charts-highcharts</artifactId>
+	             <version>${gatling.version}</version>
+	     </dependency>
 	</dependencies>
 
 	<build>
@@ -83,13 +92,13 @@
 				<version>5.1</version>
 			</plugin> -->
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<runOrder>random</runOrder>
 				</configuration>
-			</plugin>
+			</plugin> -->
 
 
 
@@ -108,6 +117,40 @@
 			<!-- <plugin> <groupId>org.owasp</groupId> <artifactId>dependency-check-maven</artifactId> 
 				<version>1.4.3</version> <executions> <execution> <goals> <goal>check</goal> 
 				</goals> </execution> </executions> </plugin> -->
+				
+				
+				<!-- Add Gatling maven plugin to support gatling startup to test performance -->
+				 <plugin>
+			        <groupId>net.alchim31.maven</groupId>
+			        <artifactId>scala-maven-plugin</artifactId>
+			        <version>${scala-maven-plugin.version}</version>
+			     </plugin>
+				<plugin>
+                    <groupId>io.gatling</groupId>
+                    <artifactId>gatling-maven-plugin</artifactId>
+                    <version>${gatling-plugin.version}</version>
+                    <!--  #此configuration部分的配置，要结合自己的项目的结构来填写信息 -->
+                    <configuration>
+                       <configFolder>src/test/resources</configFolder>
+                       <dataFolder>src/test/resources/data</dataFolder>
+                       <resultsFolder>target/gatling/results</resultsFolder>
+                       <bodiesFolder>src/test/resources/bodies</bodiesFolder>
+                       <simulationsFolder>src/test/scala</simulationsFolder>
+                 </configuration>
+                   <executions>
+                     <execution>
+                       <id>execution-1</id>
+                       <goals>
+                         <goal>execute</goal>
+                       </goals>
+                       <!-- <configuration>
+                         <simulationClass>computerdatabase/BasicSimulation</simulationClass>
+                       </configuration> -->
+                     </execution>
+                    <!--  Here, can repeat the above execution segment to do another test -->
+                 </executions>
+             </plugin>
+				
 		</plugins>
 	</build>
 </project>
